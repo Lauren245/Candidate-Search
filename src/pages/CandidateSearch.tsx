@@ -13,11 +13,14 @@ const CandidateSearch = () => {
     email: "",
     company: "",
     html_url: "",
+    bio: "",
+    public_repos: -1,
   });
 
   useEffect(() => {
     const fetchUsers = async ()  => {
       const result = await searchGithub();
+      console.log(`Number of public repositiories = ${result.public_repos}`)
       setUsers(result);
     };
     fetchUsers();
@@ -37,6 +40,9 @@ const CandidateSearch = () => {
                     email: userDetails.email,
                     company: userDetails.company,
                     html_url: userDetails.html_url,
+                    bio: userDetails.bio,
+                    public_repos: userDetails.public_repos,
+
                 });
             };
             fetchUserDetails();
@@ -48,13 +54,27 @@ const CandidateSearch = () => {
       <>
           <h1>CandidateSearch</h1>
           {gitHubUser && (
-              <div>
-                    <p><img src={gitHubUser.avatar_url || ''} alt='The GitHub user avatar image'></img></p>
-                    <h2>Developer Name: {gitHubUser.name || 'no name given'}</h2>
-                    <h2>Location: {gitHubUser.location || 'no location'}</h2>
-                    <h2>Email: {gitHubUser.email || 'no email'}</h2>
-                    <h2>{gitHubUser.company}</h2>
-                    <p><a href={gitHubUser.html_url || ''} target='_blank'>GitHub Profile</a></p>
+              <div className="card">
+                  <div className="card-header">
+                      <img src={gitHubUser.avatar_url || ''} alt="The GitHub user avatar" className="avatar" />
+                      <h2>{gitHubUser.login}</h2>
+                  </div>
+
+                  <div className="card-body">
+                      <p><strong>Developer Name:</strong> {gitHubUser.name || 'no name given'}</p>
+                      <p><strong>Location:</strong> {gitHubUser.location || 'no location'}</p>
+                      <p><strong>Email:</strong> {gitHubUser.email || 'no email'}</p>
+                      <p><strong>Company:</strong> {gitHubUser.company || 'no company listed'}</p>
+                      <p><strong>Number of public repositories:</strong> {gitHubUser.public_repos}</p>
+                      <p><strong>Bio:</strong> {gitHubUser.bio || 'no bio'}</p>
+                  </div>
+
+                  <div className="card-footer">
+                      <a href={gitHubUser.html_url || ''} target="_blank" rel="noopener noreferrer" className="profile-link">
+                        View GitHub Profile
+                      </a>
+                  </div>
+
               </div>
           )}
       </>

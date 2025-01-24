@@ -9,4 +9,6 @@ export default interface Candidate {
     readonly email: string | null;
     readonly company: string | null;
     readonly html_url: string | null; /*This is their GitHub URL so this would only be null if the API call failed */
+    readonly bio: string | null;
+    readonly public_repos: number | null;
 }
