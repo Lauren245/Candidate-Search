@@ -208,3 +208,8 @@ body {
   color: #ffffff; /* Change to white on hover */
 }
 
+/*Error message styling*/
+.error-message{
+  color: red;
+}
+

@@ -17,38 +17,69 @@ const CandidateSearch = () => {
     public_repos: -1,
   });
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
   useEffect(() => {
     const fetchUsers = async ()  => {
-      const result = await searchGithub();
-      console.log(`Number of public repositiories = ${result.public_repos}`)
-      setUsers(result);
+      try{
+        setErrorMessage("");
+        const result = await searchGithub();
+        //check if call was successful but didn't return anything (ie. 404 error)
+        if(!result || result.length === 0){
+          throw new Error('no users found');
+        }
+        //console.log(`Number of public repositiories = ${result.public_repos}`)
+        setUsers(result);
+
+      }catch(error){
+          console.error(`failed to fetch users: ${error}`);
+          setErrorMessage('Unable to fetch users. Please try again.');
+
+      }finally{
+        setIsLoading(false); //Mark loading as complete.
+      }
+
     };
     fetchUsers();
   }, []);
 
   useEffect(() => {
-    if(users.length > 0){
+    if(isLoading) return; //Don't log an error while loading users
+      if(users.length > 0){
           const login = users[0].login;
-        if(login){
+          if(login){
             const fetchUserDetails = async () => {
-                const userDetails = await searchGithubUser(login);
-                setGitHubUser({
-                    avatar_url: userDetails.avatar_url,
-                    name: userDetails.name,
-                    login: userDetails.login, 
-                    location: userDetails.location,
-                    email: userDetails.email,
-                    company: userDetails.company,
-                    html_url: userDetails.html_url,
-                    bio: userDetails.bio,
-                    public_repos: userDetails.public_repos,
-
-                });
+                try{          
+                  //setErrorMessage("cleared");
+                  const userDetails = await searchGithubUser(login);
+                  if(Object.keys(userDetails).length === 0){
+                    throw new Error('User details not found');
+                  }
+                  setGitHubUser({
+                      avatar_url: userDetails.avatar_url,
+                      name: userDetails.name,
+                      login: userDetails.login, 
+                      location: userDetails.location,
+                      email: userDetails.email,
+                      company: userDetails.company,
+                      html_url: userDetails.html_url,
+                      bio: userDetails.bio,
+                      public_repos: userDetails.public_repos,
+                  });    
+                }catch(error){
+                  console.error(`Failed to fetch user details: ${error}`);
+                  setErrorMessage('Unable to fetch user details. Please try again.');
+                }
             };
-            fetchUserDetails();
+              fetchUserDetails();
+          }
+        }else{
+          console.error('Unable to find a user profile.');
+          setErrorMessage('Unable to find a user profile. Please try again.');
+          
         }
-      }
-  }, [users]); //this effect runs when the user state is updated
+  }, [users, isLoading]); //this effect runs when the user state is updated
 
   const saveCandidate = () => {
         console.log('running saveCandidate');
@@ -64,6 +95,7 @@ const CandidateSearch = () => {
   return (
       <>
           <h1>CandidateSearch</h1>
+          {errorMessage && <h2 className="error-message">{errorMessage}</h2>}
           {gitHubUser && (
             <>
                 <div className="card">
