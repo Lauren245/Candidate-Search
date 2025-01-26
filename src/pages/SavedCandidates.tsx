@@ -1,4 +1,5 @@
 import Candidate from '../interfaces/Candidate.interface';
+import { FaSquareXmark } from 'react-icons/fa6';
 
 const SavedCandidates = () => {
 
@@ -28,7 +29,7 @@ const SavedCandidates = () => {
               <td>{candidate.email || 'no email'}</td>
               <td>{candidate.company || 'no company listed'}</td>
               <td>{candidate.bio || 'no bio'}</td>
-              <td>Button goes here</td>
+              <td><button type='button'><FaSquareXmark/></button></td>
             </tr>
             ))}
         </tbody>
