@@ -90,6 +90,21 @@ tr {
   color: white;
 }
 
+th, td {
+  padding: 5px 30px;
+  /* border: 1px solid #ddd; */
+}
+
+/*used for styling avatar in potential candidates table*/
+.avatar-scaled {
+  border-radius: 5%;
+  width: 70px; /* Larger avatar */
+  height: 70px; /* Larger avatar */
+  margin: 10px; 
+  object-fit: cover;
+  border: 4px solid #fff; /* Border around the avatar to make it stand out */
+}
+
 tbody tr:nth-child(odd) {
   background-color: #333333;
 }
@@ -169,6 +184,7 @@ body {
   object-fit: cover;
   border: 4px solid #fff; /* Border around the avatar to make it stand out */
 }
+
 
 /* Username Styling */
 .card-header h2 {
