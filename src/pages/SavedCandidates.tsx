@@ -4,6 +4,14 @@ import { FaSquareXmark } from 'react-icons/fa6';
 const SavedCandidates = () => {
 
   const candidateArr: Candidate[] = JSON.parse(localStorage.getItem('savedCandidates') || '[]')
+
+  const deleteCandidate = (login: string | null) => {
+    console.log(`LOGIN = ${login}`);
+    console.log(`typeof login = ${typeof login}`);
+    if(typeof login === 'string'){
+        console.log("inside string if statement check")
+    }
+  }
   return (
     <>
       <h1>Potential Candidates</h1>

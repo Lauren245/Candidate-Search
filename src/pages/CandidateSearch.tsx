@@ -18,7 +18,11 @@ const CandidateSearch = () => {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [refresh, setRefresh] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  console.log("***isLoading = " + isLoading);
+  console.log("***refresh = " + refresh);
 
   useEffect(() => {
     const fetchUsers = async ()  => {
@@ -42,7 +46,7 @@ const CandidateSearch = () => {
 
     };
     fetchUsers();
-  }, []);
+  }, [refresh]); 
 
   useEffect(() => {
     if(isLoading) return; //Don't log an error while loading users
@@ -83,14 +87,37 @@ const CandidateSearch = () => {
 
   const saveCandidate = () => {
         console.log('running saveCandidate');
-        let parsedCandidateToSave: Candidate[] = [];
-        const storedCandidates = localStorage.getItem('savedCandidates');
-        if(typeof storedCandidates === 'string'){
-            parsedCandidateToSave = JSON.parse(storedCandidates);
-        }
-        parsedCandidateToSave.push(gitHubUser);
-        localStorage.setItem('savedCandidates', JSON.stringify(parsedCandidateToSave));
+        try{
+            let parsedCandidateToSave: Candidate[] = [];
+            const storedCandidates = localStorage.getItem('savedCandidates');
+
+            if(typeof storedCandidates === 'string'){
+                parsedCandidateToSave = JSON.parse(storedCandidates);
+            }
+
+            parsedCandidateToSave.push(gitHubUser);
+            localStorage.setItem('savedCandidates', JSON.stringify(parsedCandidateToSave));
+
+            //move on to the next candidate.
+            if(users.length > 1){
+              //an API call returns 30 users. Run through these first before making a new API call.
+              setUsers((prevUsers) => prevUsers.slice(1)); //Remove the current user and get the next one
+              console.log(`REMAINING USERS = ${users.length}`);
+            }else{
+              //no more candidates re-run the API call
+              setIsLoading(true);
+              setRefresh((prev) => !prev);
+          }
+          }catch(error){
+            console.error(`An error occured when accessing localStorage: ${error}`);
+            setErrorMessage('An Error occured while accessing localStorage. Check the console for more details');
+          }      
   }
+
+  // const rejectCandidate = () => {
+  //   console.log('running reject candidate.');
+  //   //since the candidate is not save to anything
+  // }
 
   return (
       <>
