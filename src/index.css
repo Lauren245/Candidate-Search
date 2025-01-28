@@ -43,6 +43,36 @@ h1 {
   line-height: 1.1;
 }
 
+/*button container is used for displaying the accept and reject buttons on the candidate search page*/
+.button-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Adjust width as needed */
+  max-width: 300px; /* Limit width for larger screens */
+  left: 50%;
+
+}
+
+
+.save-button {
+  color: rgba(0, 128, 0, 0.929);
+  font-size: 6em; 
+  transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+.reject-button {
+  color: rgb(255, 0, 0);
+  font-size: 6em;
+  transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+.save-button:hover, .reject-button:hover {
+  transform: scale(1.2); /* Scale up the element on hover */
+}
+
+
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -231,8 +261,4 @@ body {
   color: #ffffff; /* Change to white on hover */
 }
 
-/*Error message styling*/
-.error-message{
-  color: red;
-}
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { searchGithub, searchGithubUser } from '../api/API';
+import { IoCheckmarkCircleSharp, IoCloseCircleSharp } from 'react-icons/io5';
 import Candidate from '../interfaces/Candidate.interface';
 import User from '../interfaces/User.interface'
 
@@ -125,10 +126,10 @@ const CandidateSearch = () => {
     <>
       <h1>CandidateSearch</h1>
       {errorMessage ? (
-        <>
+        <div className="card">
           <h2 className="error-message">{errorMessage}</h2>
           <button type='button' onClick={nextCandidate}>Refresh</button>
-        </>
+        </div>
       ) : (
         gitHubUser && (
           <>
@@ -153,8 +154,10 @@ const CandidateSearch = () => {
                 </a>
               </div>
             </div>
-            <button type='button' onClick={saveCandidate}>Add</button>
-            <button type='button' onClick={nextCandidate}>Reject</button>
+            <div className="button-container">
+              <IoCloseCircleSharp className="reject-button" onClick={nextCandidate} />
+              <IoCheckmarkCircleSharp className="save-button" onClick={saveCandidate} />
+            </div>
           </>
         )
       )}

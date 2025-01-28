@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Candidate from '../interfaces/Candidate.interface';
-import { FaSquareXmark } from 'react-icons/fa6';
+import { IoCloseCircleSharp } from 'react-icons/io5';
 
 const SavedCandidates = () => {
 
@@ -66,7 +66,7 @@ const SavedCandidates = () => {
                   <td>{candidate.email || 'no email'}</td>
                   <td>{candidate.company || 'no company listed'}</td>
                   <td>{candidate.bio || 'no bio'}</td>
-                  <td><button type='button' onClick={() => {deleteCandidate(candidate)}}><FaSquareXmark/></button></td>
+                  <td><IoCloseCircleSharp className="reject-button" onClick={() => {deleteCandidate(candidate)}} /></td>
                 </tr>
               )
             }
