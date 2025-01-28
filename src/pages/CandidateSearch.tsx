@@ -120,40 +120,45 @@ const CandidateSearch = () => {
       }
   }
 
+
   return (
-      <>
-          <h1>CandidateSearch</h1>
-          {errorMessage && <h2 className="error-message">{errorMessage}</h2>}
-          {gitHubUser && (
-            <>
-                <div className="card">
-                    <div className="card-header">
-                        <img src={gitHubUser.avatar_url || ''} alt="The GitHub user avatar" className="avatar" />
-                        <h2>{gitHubUser.login}</h2>
-                    </div>
+    <>
+      <h1>CandidateSearch</h1>
+      {errorMessage ? (
+        <>
+          <h2 className="error-message">{errorMessage}</h2>
+          <button type='button' onClick={nextCandidate}>Refresh</button>
+        </>
+      ) : (
+        gitHubUser && (
+          <>
+            <div className="card">
+              <div className="card-header">
+                <img src={gitHubUser.avatar_url || ''} alt="The GitHub user avatar" className="avatar" />
+                <h2>{gitHubUser.login}</h2>
+              </div>
 
-                    <div className="card-body">
-                        <p><strong>Developer Name:</strong> {gitHubUser.name || 'no name given'}</p>
-                        <p><strong>Location:</strong> {gitHubUser.location || 'no location'}</p>
-                        <p><strong>Email:</strong> {gitHubUser.email || 'no email'}</p>
-                        <p><strong>Company:</strong> {gitHubUser.company || 'no company listed'}</p>
-                        <p><strong>Number of public repositories:</strong> {gitHubUser.public_repos}</p>
-                        <p><strong>Bio:</strong> {gitHubUser.bio || 'no bio'}</p>
-                    </div>
+              <div className="card-body">
+                <p><strong>Developer Name:</strong> {gitHubUser.name || 'no name given'}</p>
+                <p><strong>Location:</strong> {gitHubUser.location || 'no location'}</p>
+                <p><strong>Email:</strong> {gitHubUser.email || 'no email'}</p>
+                <p><strong>Company:</strong> {gitHubUser.company || 'no company listed'}</p>
+                <p><strong>Number of public repositories:</strong> {gitHubUser.public_repos}</p>
+                <p><strong>Bio:</strong> {gitHubUser.bio || 'no bio'}</p>
+              </div>
 
-                    <div className="card-footer">
-                        <a href={gitHubUser.html_url || ''} target="_blank" rel="noopener noreferrer" className="profile-link">
-                          View GitHub Profile
-                        </a>
-                    </div>
-
-                </div>
-                <button type='button' onClick={saveCandidate}>Add</button>
-                <button type='button' onClick={nextCandidate}>Reject</button>
-            </>
-          )}
-          
-      </>
+              <div className="card-footer">
+                <a href={gitHubUser.html_url || ''} target="_blank" rel="noopener noreferrer" className="profile-link">
+                  View GitHub Profile
+                </a>
+              </div>
+            </div>
+            <button type='button' onClick={saveCandidate}>Add</button>
+            <button type='button' onClick={nextCandidate}>Reject</button>
+          </>
+        )
+      )}
+    </>
   );
 };
 
