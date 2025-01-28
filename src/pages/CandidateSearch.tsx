@@ -99,25 +99,26 @@ const CandidateSearch = () => {
             localStorage.setItem('savedCandidates', JSON.stringify(parsedCandidateToSave));
 
             //move on to the next candidate.
-            if(users.length > 1){
-              //an API call returns 30 users. Run through these first before making a new API call.
-              setUsers((prevUsers) => prevUsers.slice(1)); //Remove the current user and get the next one
-              console.log(`REMAINING USERS = ${users.length}`);
-            }else{
-              //no more candidates re-run the API call
-              setIsLoading(true);
-              setRefresh((prev) => !prev);
-          }
+            nextCandidate();
+
           }catch(error){
             console.error(`An error occured when accessing localStorage: ${error}`);
             setErrorMessage('An Error occured while accessing localStorage. Check the console for more details');
           }      
   }
-
-  // const rejectCandidate = () => {
-  //   console.log('running reject candidate.');
-  //   //since the candidate is not save to anything
-  // }
+  const nextCandidate = () => {
+    setErrorMessage("");
+    //move on to the next candidate.
+    if(users.length > 1){
+      //an API call returns 30 users. Run through these first before making a new API call.
+      setUsers((prevUsers) => prevUsers.slice(1)); //Remove the current user and get the next one
+        console.log(`REMAINING USERS = ${users.length}`);
+      }else{
+        //no more candidates re-run the API call
+        setIsLoading(true);
+              setRefresh((prev) => !prev);
+            }
+  }
 
   return (
       <>
@@ -148,6 +149,7 @@ const CandidateSearch = () => {
 
                 </div>
                 <button type='button' onClick={saveCandidate}>Add</button>
+                <button type='button' onClick={nextCandidate}>Reject</button>
             </>
           )}
           
