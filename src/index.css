@@ -90,6 +90,21 @@ tr {
   color: white;
 }
 
+th, td {
+  padding: 5px 30px;
+  /* border: 1px solid #ddd; */
+}
+
+/*used for styling avatar in potential candidates table*/
+.avatar-scaled {
+  border-radius: 5%;
+  width: 70px; /* Larger avatar */
+  height: 70px; /* Larger avatar */
+  margin: 10px; 
+  object-fit: cover;
+  border: 4px solid #fff; /* Border around the avatar to make it stand out */
+}
+
 tbody tr:nth-child(odd) {
   background-color: #333333;
 }
@@ -118,3 +133,99 @@ tbody tr:nth-child(odd) {
   width: 80vw;
   table-layout: fixed;
 }
+
+/*Candidate Search Card Stylings*/
+
+/* Global Styles for Dark Theme */
+body {
+  background: linear-gradient(
+    180deg,
+    rgb(32, 44, 136) 0%,
+    rgba(9, 9, 121, 1) 15%,
+    rgba(0, 2, 18, 1) 100%
+  );
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+}
+
+/* Card Styling */
+.card {
+  border: 1px solid #444;
+  border-radius: 15px; /* Slightly rounder corners */
+  padding: 30px; /* Increased padding */
+  width: 420px; /* Slightly wider card */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* More prominent shadow */
+  margin: 40px auto;
+  background-color: rgba(48, 68, 91, 0.9); /* Lighter blue-gray with higher opacity */
+  backdrop-filter: blur(15px); /* Stronger blur effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+/* Hover effect for the card */
+.card:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Avatar Styling */
+.avatar {
+  border-radius: 50%;
+  width: 140px; /* Larger avatar */
+  height: 140px; /* Larger avatar */
+  margin-bottom: 20px; /* Increased margin below the avatar */
+  object-fit: cover;
+  border: 4px solid #fff; /* Border around the avatar to make it stand out */
+}
+
+
+/* Username Styling */
+.card-header h2 {
+  font-size: 26px; /* Larger font size */
+  color: #ffffff;
+  margin: 0;
+  font-weight: bold; /* Make the username bold */
+}
+
+/* Card Body */
+.card-body p {
+  margin: 15px 0;
+  color: #bdbdbd;
+}
+
+.card-body p strong {
+  font-weight: bold;
+  color: #ffffff; /* Make labels stand out */
+}
+
+/* Card Footer */
+.card-footer {
+  text-align: center;
+  margin-top: 30px; /* More space from the body */
+}
+
+/* Profile Link Styling */
+.profile-link {
+  text-decoration: none;
+  color: #00aaff; /* Bright accent color */
+  font-weight: bold;
+  font-size: 16px; /* Slightly larger link */
+}
+
+.profile-link:hover {
+  text-decoration: underline;
+  color: #ffffff; /* Change to white on hover */
+}
+
+/*Error message styling*/
+.error-message{
+  color: red;
+}
+
