@@ -112,7 +112,14 @@ tbody tr:nth-child(odd) {
 .nav {
   display: flex;
   justify-content: flex-start;
+  width: 100%;
   padding: 1em 2em;
+}
+.navbar-nav {
+  display: flex; /* Makes the list items appear in a row */
+  list-style: none; /* Removes bullet points */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
 }
 
 .nav-item {
