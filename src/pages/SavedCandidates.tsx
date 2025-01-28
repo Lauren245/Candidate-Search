@@ -66,7 +66,7 @@ const SavedCandidates = () => {
                   <td>{candidate.email || 'no email'}</td>
                   <td>{candidate.company || 'no company listed'}</td>
                   <td>{candidate.bio || 'no bio'}</td>
-                  <td><IoCloseCircleSharp className="reject-button" onClick={() => {deleteCandidate(candidate)}} /></td>
+                  <td><IoCloseCircleSharp className="reject-button-small" onClick={() => {deleteCandidate(candidate)}} /></td>
                 </tr>
               )
             }
