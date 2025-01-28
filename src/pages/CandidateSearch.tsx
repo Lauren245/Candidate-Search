@@ -110,14 +110,14 @@ const CandidateSearch = () => {
     setErrorMessage("");
     //move on to the next candidate.
     if(users.length > 1){
-      //an API call returns 30 users. Run through these first before making a new API call.
-      setUsers((prevUsers) => prevUsers.slice(1)); //Remove the current user and get the next one
+        //an API call returns 30 users. Run through these first before making a new API call.
+        setUsers((prevUsers) => prevUsers.slice(1)); //Remove the current user and get the next one
         console.log(`REMAINING USERS = ${users.length}`);
       }else{
         //no more candidates re-run the API call
         setIsLoading(true);
-              setRefresh((prev) => !prev);
-            }
+        setRefresh((prev) => !prev);
+      }
   }
 
   return (
