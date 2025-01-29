@@ -34,7 +34,7 @@ const SavedCandidates = () => {
   }
 
   return (
-    <>
+    <div className ='test-container'>
       <h1>Potential Candidates</h1>
       {candidates.length > 0 ?(
         <table>
@@ -79,7 +79,7 @@ const SavedCandidates = () => {
             <p>Visit the candidate search page to add new candidates.</p>
           </>
         )} 
-    </>
+    </div>
   );
 };
 
