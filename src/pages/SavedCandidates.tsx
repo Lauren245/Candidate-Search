@@ -34,7 +34,7 @@ const SavedCandidates = () => {
   }
 
   return (
-    <div className ='test-container'>
+    <div className ='table-container'>
       <h1>Potential Candidates</h1>
       {candidates.length > 0 ?(
         <table>
