@@ -7,14 +7,14 @@ import User from '../interfaces/User.interface'
 const CandidateSearch = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [gitHubUser, setGitHubUser] = useState<Candidate>({
-    avatar_url: "",
-    name: "",
-    login: "", 
-    location: "",
-    email: "",
-    company: "",
-    html_url: "",
-    bio: "",
+    avatar_url: '',
+    name: '',
+    login: '', 
+    location: '',
+    email: '',
+    company: '',
+    html_url: '',
+    bio: '',
     public_repos: -1,
   });
 
@@ -22,19 +22,18 @@ const CandidateSearch = () => {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  console.log("***isLoading = " + isLoading);
-  console.log("***refresh = " + refresh);
+  console.log('***isLoading = ' + isLoading);
+  console.log('***refresh = ' + refresh);
 
   useEffect(() => {
     const fetchUsers = async ()  => {
       try{
-        setErrorMessage("");
+        setErrorMessage('');
         const result = await searchGithub();
         //check if call was successful but didn't return anything (ie. 404 error)
         if(!result || result.length === 0){
           throw new Error('no users found');
         }
-        //console.log(`Number of public repositiories = ${result.public_repos}`)
         setUsers(result);
 
       }catch(error){
@@ -56,7 +55,6 @@ const CandidateSearch = () => {
           if(login){
             const fetchUserDetails = async () => {
                 try{          
-                  //setErrorMessage("cleared");
                   const userDetails = await searchGithubUser(login);
                   if(Object.keys(userDetails).length === 0){
                     throw new Error('User details not found');
@@ -87,7 +85,6 @@ const CandidateSearch = () => {
   }, [users, isLoading]); //this effect runs when the user state is updated
 
   const saveCandidate = () => {
-        console.log('running saveCandidate');
         try{
             let parsedCandidateToSave: Candidate[] = [];
             const storedCandidates = localStorage.getItem('savedCandidates');
@@ -108,8 +105,7 @@ const CandidateSearch = () => {
           }      
   }
   const nextCandidate = () => {
-    setErrorMessage("");
-    //move on to the next candidate.
+    setErrorMessage('');
     if(users.length > 1){
         //an API call returns 30 users. Run through these first before making a new API call.
         setUsers((prevUsers) => prevUsers.slice(1)); //Remove the current user and get the next one
@@ -126,20 +122,20 @@ const CandidateSearch = () => {
     <>
       <h1>CandidateSearch</h1>
       {errorMessage ? (
-        <div className="card">
-          <h2 className="error-message">{errorMessage}</h2>
+        <div className='card'>
+          <h2 className='error-message'>{errorMessage}</h2>
           <button type='button' onClick={nextCandidate}>Refresh</button>
         </div>
       ) : (
         gitHubUser && (
           <>
-            <div className="card">
-              <div className="card-header">
-                <img src={gitHubUser.avatar_url || ''} alt="The GitHub user avatar" className="avatar" />
+            <div className='card'>
+              <div className='card-header'>
+                <img src={gitHubUser.avatar_url || ''} alt='The GitHub user avatar' className='avatar' />
                 <h2>{gitHubUser.login}</h2>
               </div>
 
-              <div className="card-body">
+              <div className='card-body'>
                 <p><strong>Developer Name:</strong> {gitHubUser.name || 'no name given'}</p>
                 <p><strong>Location:</strong> {gitHubUser.location || 'no location'}</p>
                 <p><strong>Email:</strong> {gitHubUser.email || 'no email'}</p>
@@ -148,15 +144,15 @@ const CandidateSearch = () => {
                 <p><strong>Bio:</strong> {gitHubUser.bio || 'no bio'}</p>
               </div>
 
-              <div className="card-footer">
-                <a href={gitHubUser.html_url || ''} target="_blank" rel="noopener noreferrer" className="profile-link">
+              <div className='card-footer'>
+                <a href={gitHubUser.html_url || ''} target='_blank' rel='noopener noreferrer' className='profile-link'>
                   View GitHub Profile
                 </a>
               </div>
             </div>
-            <div className="button-container">
-              <IoCloseCircleSharp className="reject-button" onClick={nextCandidate} />
-              <IoCheckmarkCircleSharp className="save-button" onClick={saveCandidate} />
+            <div className='button-container'>
+              <IoCloseCircleSharp className='reject-button' onClick={nextCandidate} />
+              <IoCheckmarkCircleSharp className='save-button' onClick={saveCandidate} />
             </div>
           </>
         )
