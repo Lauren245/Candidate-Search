@@ -31,7 +31,7 @@ Candidate Search is a web application that allows users to search for GitHub use
 The application's UI is currently not optimized for mobile devices; this will be implemented in a future update.
 
 ## Installation
-**Note: The app does not need to be installed unless you wish to run the app locally on your machine. To just use the app go to [LINK HERE]**
+**Note: The app does not need to be installed unless you wish to run the app locally on your machine. To just use the app go to https://candidate-search-vbhl.onrender.com/**
 
 To install this application, follow these steps:
 1. **Clone [repository](https://github.com/Lauren245/Candidate-Search)**.
@@ -95,7 +95,7 @@ Email: laurenmoorejm@gmail.com
 ## Screenshots
 
 ## Render Deployed Version
-[Click here](#) to view the app as deployed on Render.
+[Click here](https://candidate-search-vbhl.onrender.com/) to view the app as deployed on Render.
 
 *Note: since it is being hosted on a free tier, it will take a while for the app to load when opening it for the first time.*
 
